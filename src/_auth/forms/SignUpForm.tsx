@@ -8,11 +8,13 @@ import { Button } from '@/components/ui/button.tsx';
 import { useForm } from "react-hook-form";
 import { SignUpValidation } from "@/lib/validation";
 import Loader from "@/components/shared/Loader.tsx";
+import { Link } from "react-router-dom";
+import { createUserAccount } from "@/lib/appwrite/api.ts";
 
 
 
 const SignUpForm = () => {
-    const isLoading = true;
+    const isLoading: boolean = false;
 
     const form = useForm<z.infer<typeof SignUpValidation>>({
         resolver: zodResolver(SignUpValidation),
@@ -24,8 +26,10 @@ const SignUpForm = () => {
         },
     })
 
-    function onSubmit(values: z.infer<typeof SignUpValidation>) {
-        console.log(values)
+    async function onSubmit(values: z.infer<typeof SignUpValidation>) {
+        // create the user
+        const newUser = await createUserAccount(values);
+        console.log(newUser)
     }
 
     return (
@@ -35,7 +39,7 @@ const SignUpForm = () => {
 
                 <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12">Create a new account</h2>
                 <p className="text-light-3 small-medium md:base-regular mt-2">
-                    To use the app enter your account details
+                    To use the app, please enter your account details
                 </p>
 
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 w-full mt-4">
@@ -90,6 +94,10 @@ const SignUpForm = () => {
                             </div>
                         ) : "Sign Up"}
                     </Button>
+                    <p className="text-small-regular text-light-2 text-center mt-2">
+                        Already have an account?
+                        <Link to='/sign-in' className="text-primary-500 text-small-semibold ml-1"> Log in </Link>
+                    </p>
                 </form>
             </div>
         </Form>

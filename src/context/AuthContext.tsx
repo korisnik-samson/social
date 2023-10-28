@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { IContextType, IUser } from "@/types";
 import { getCurrentUser } from "@/lib/appwrite/api.ts";
 import { useNavigate } from "react-router-dom";
@@ -29,7 +28,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false)
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const checkAuthUser = async () => {
         try {
@@ -62,11 +61,11 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     useEffect(() => {
-        if (localStorage.getItem('cookieFallback') === '[]' ||
-            localStorage.getItem('cookieFallback') === null || localStorage.getItem('cookieFallback') === null)
-
+        /*localStorage.getItem('cookieFallback') === null ||*/
+        if (localStorage.getItem('cookieFallback') === '[]')
             navigate('/sign-in')
 
+        checkAuthUser()
     }, []);
 
     const value = {

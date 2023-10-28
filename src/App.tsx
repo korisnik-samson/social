@@ -8,14 +8,7 @@ import './globals.css';
 import AuthLayout from "./_auth/AuthLayout.tsx";
 import RootLayout from "./_root/RootLayout.tsx";
 import { Toaster } from "@/components/ui/toaster.tsx";
-import Explore from "@/_root/pages/Explore.tsx";
-import AllUsers from "@/_root/pages/AllUsers.tsx";
-import CreatePost from "@/_root/pages/CreatePost.tsx";
-import Saved from "@/_root/pages/Saved.tsx";
-import EditPost from "@/_root/pages/EditPost.tsx";
-import PostDetails from "@/_root/pages/PostDetails.tsx";
-import Profile from "@/_root/pages/Profile.tsx";
-import UpdateProfile from "@/_root/pages/UpdateProfile.tsx";
+import { Explore, AllUsers, CreatePost, Saved, EditPost, PostDetails, Profile, UpdateProfile } from "@/_root/pages/"
 
 const App = () => {
     return (

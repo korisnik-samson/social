@@ -1,4 +1,5 @@
 import React from "react";
+import { Models } from "appwrite";
 
 export type IContextType = {
     user: IUser;
@@ -7,6 +8,25 @@ export type IContextType = {
     isAuthenticated: boolean;
     setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
     checkAuthUser: () => Promise<boolean>;
+}
+
+export type PostStatsProps = {
+    post: Models.Document;
+    userId: string;
+}
+
+export type PostCardProps = {
+    post: Models.Document;
+}
+
+
+export type PostFormProps = {
+    post?: Models.Document;
+}
+
+export type FileUploaderProps = {
+    fieldChange: (FILES: File[]) => void;
+    mediaUrl: string;
 }
 
 export type INavLink = {

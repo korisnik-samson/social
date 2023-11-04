@@ -103,7 +103,7 @@ const SignInForm = () => {
                             <div className="flex-center gap-2">
                                 <Loader /> Loading
                             </div>
-                        ) : "Sign Up"}
+                        ) : "Login"}
                     </Button>
                     <p className="text-small-regular text-light-2 text-center mt-2">
                         Don't have an account?

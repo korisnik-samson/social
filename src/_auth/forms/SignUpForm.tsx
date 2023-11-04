@@ -1,7 +1,8 @@
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, useNavigate } from "react-router-dom";
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
@@ -41,7 +42,10 @@ const SignUpForm = () => {
 
             if (!newUser) {
                 return toast({
-                    title: "Sign up failed. Please try again"
+                    variant: "destructive",
+                    title: "Sign up failed",
+                    description: 'Please try again',
+                    action: <ToastAction altText="Try again">Try again</ToastAction>,
                 })
             }
 
@@ -52,7 +56,10 @@ const SignUpForm = () => {
 
             if (!session) {
                 toast({
-                    title: "Something went wrong. Please login your new account"
+                    variant: "destructive",
+                    title: "Something went wrong.",
+                    description: ' Please login your new account',
+                    action: <ToastAction altText="Try again">Try again</ToastAction>,
                 })
 
                 navigate('/sign-in')
@@ -68,7 +75,10 @@ const SignUpForm = () => {
 
             } else {
                 return toast({
-                    title: "Login failed. Please try again"
+                    variant: "destructive",
+                    title: "Login failed",
+                    description: 'Please try again',
+                    action: <ToastAction altText="Try again">Try again</ToastAction>,
                 })
             }
 

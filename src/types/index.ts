@@ -22,6 +22,7 @@ export type PostCardProps = {
 
 export type PostFormProps = {
     post?: Models.Document;
+    action?: 'Create' | 'Update'
 }
 
 export type FileUploaderProps = {

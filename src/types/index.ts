@@ -11,7 +11,7 @@ export type IContextType = {
 }
 
 export type PostStatsProps = {
-    post: Models.Document;
+    post?: Models.Document;
     userId: string;
 }
 

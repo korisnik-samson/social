@@ -2,8 +2,9 @@ import { useGetPostById } from "@/lib/react-query/queriesAndMutations";
 import { Link, useParams } from 'react-router-dom'
 import Loader from "@/components/shared/Loader";
 import { multiFormatDateString } from "@/lib/utils";
-import { useUserContext } from "@/context/AuthContext.tsx";
-import { Button } from "@/components/ui/button.tsx";
+import { useUserContext } from "@/context/AuthContext";
+import { Button } from "@/components/ui/button";
+import PostStats from "@/components/shared/PostStats.tsx";
 
 const PostDetails = () => {
     const { id } = useParams();
@@ -14,9 +15,9 @@ const PostDetails = () => {
 
     return (
         <div className="post_details-container">
-            {isPending ? <Loader/> : (
+            {isPending ? <Loader /> : (
                 <div className="post_details-card">
-                    <img src={post?.imageUrl} alt="post" className="post_detail-img" />
+                    <img src={post?.imageUrl} alt="post" className="post_details-img" />
 
                     <div className="post_details-info">
                         <div className="flex-between w-full">
@@ -48,6 +49,23 @@ const PostDetails = () => {
                                         <img src="/assets/icons/delete.svg" alt="delete" width={24} height={24} />
                                 </Button>
                             </div>
+                        </div>
+
+                        <hr className="border w-full border-dark-4/80" />
+
+                        <div className="flex flex-col flex-1 w-full small-medium lg:base-regular">
+                            <p>{post?.caption}</p>
+                            <ul className="flex gap-1 mt-2">
+                                {post?.tags.map((tag: string) => (
+                                    <li key={tag} className="text-light-3">
+                                        #{tag}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        <div className="w-full">
+                            <PostStats post={post } userId={user.id} />
                         </div>
                     </div>
                 </div>

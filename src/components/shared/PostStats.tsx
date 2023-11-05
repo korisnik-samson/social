@@ -10,7 +10,7 @@ import { useLocation } from "react-router-dom";
 
 const PostStats = ({ post, userId }: PostStatsProps) => {
     const location = useLocation();
-    const likedList = post.likes.map((user: Models.Document) => user.id);
+    const likedList = post?.likes.map((user: Models.Document) => user.id);
 
     const [likes, setLikes] = useState<string[]>(likedList);
     const [isSaved, setIsSaved] = useState(false);
@@ -20,7 +20,7 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
     const { mutate: deleteSavedPost, isPending: isDeletingSaved } = useDeleteSavedPost();
 
     const { data: currentUser } = useGetCurrentUser();
-    const savedPostRecord = currentUser?.save.find((record: Models.Document) => record.post.$id === post.$id);
+    const savedPostRecord = currentUser?.save.find((record: Models.Document) => record.post.$id === post?.$id);
 
     useEffect(() => {
         setIsSaved(!!savedPostRecord)
@@ -38,7 +38,7 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
         }
 
         setLikes(likesArray)
-        likePost({ postId: post.$id, likesArray })
+        likePost({ postId: post?.$id || '', likesArray })
     }
 
     const containerStyles = location.pathname.startsWith("/profile") ? "w-full" : "";
@@ -51,7 +51,7 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
             deleteSavedPost(savedPostRecord.$id)
 
         } else {
-            savePost({ postId: post.$id, userId })
+            savePost({ postId: post?.$id || '', userId })
             setIsSaved(true);
         }
     }

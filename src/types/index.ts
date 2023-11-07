@@ -15,6 +15,17 @@ export type PostStatsProps = {
     userId: string;
 }
 
+export type GridPostListProps = {
+    posts: Models.Document[];
+    showUser?: boolean;
+    showStats?: boolean;
+}
+
+export type SearchResultsProps = {
+    isSearchFetching: boolean;
+    searchedPosts?:Models.Document[];
+}
+
 export type PostCardProps = {
     post: Models.Document;
 }

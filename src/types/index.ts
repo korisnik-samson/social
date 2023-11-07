@@ -10,6 +10,21 @@ export type IContextType = {
     checkAuthUser: () => Promise<boolean>;
 }
 
+export type UserCardProps = {
+    user: Models.Document;
+};
+
+export interface StatBlockProps {
+    value: string | number;
+    label: string;
+}
+
+
+export type ProfileUploaderProps = {
+    fieldChange: (files: File[]) => void;
+    mediaUrl: string;
+};
+
 export type PostStatsProps = {
     post?: Models.Document;
     userId: string;
@@ -23,7 +38,7 @@ export type GridPostListProps = {
 
 export type SearchResultsProps = {
     isSearchFetching: boolean;
-    searchedPosts?:Models.Document[];
+    searchedPosts?:Models.DocumentList<any>;
 }
 
 export type PostCardProps = {

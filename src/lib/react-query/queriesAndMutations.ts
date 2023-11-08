@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient, useInfiniteQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient, useInfiniteQuery, QueryClient } from "@tanstack/react-query";
 
 import { QUERY_KEYS } from "@/lib/react-query/queryKeys";
 import { createUserAccount, signInAccount, getCurrentUser, signOutAccount, getUsers, createPost, getPostById, updatePost,
@@ -34,14 +34,14 @@ export const useSignOutAccount = () => {
 // ============================================================
 
 export const useGetPosts = () => {
+
+    // @ts-ignore
     return useInfiniteQuery({
         queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
         queryFn: getInfinitePosts as any,
         getNextPageParam: (lastPage: any) => {
             // If there's no data, there are no more pages.
-            if (lastPage && lastPage.documents.length === 0) {
-                return null;
-            }
+            if (lastPage && lastPage.documents.length === 0) return null
 
             // Use the $id of the last document as the cursor.
             const lastId = lastPage.documents[lastPage.documents.length - 1].$id;
@@ -209,7 +209,8 @@ export const useGetUserById = (userId: string) => {
 };
 
 export const useUpdateUser = () => {
-    const queryClient = useQueryClient();
+    const queryClient: QueryClient = useQueryClient();
+
     return useMutation({
         mutationFn: (user: IUpdateUser) => updateUser(user),
         onSuccess: (data) => {

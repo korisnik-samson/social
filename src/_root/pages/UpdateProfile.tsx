@@ -30,6 +30,8 @@ const UpdateProfile = () => {
 
     // Queries
     const { data: currentUser } = useGetUserById(id || "");
+
+    // @ts-ignore
     const { mutateAsync: updateUser, isLoading: isLoadingUpdate } = useUpdateUser();
 
     if (!currentUser) {
